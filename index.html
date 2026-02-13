@@ -8,7 +8,7 @@
 <!-- ThreeJS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<!-- Handwritten Font -->
+<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
@@ -34,12 +34,17 @@ left:0;
 width:100%;
 height:100%;
 object-fit:cover;
-z-index:-2;
+z-index:-3;
 filter:brightness(0.7);
+animation:zoom 20s ease-in-out infinite alternate;
 }
 
+@keyframes zoom{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
 
-/* soft romantic overlay */
+/* ===== SOFT OVERLAY ===== */
 body::before{
 content:"";
 position:fixed;
@@ -157,7 +162,7 @@ animation:fall 8s linear infinite;
 100%{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ===== 3D HEART CANVAS ===== */
+/* ===== 3D CANVAS ===== */
 #threeContainer{
 position:fixed;
 top:0;
@@ -169,13 +174,11 @@ z-index:-1;
 </head>
 
 <body>
-<!-- 🎬 Background Love Video -->
-<video autoplay loop playsinline id="bgVideo">
+
+<!-- 🎬 BACKGROUND VIDEO -->
+<video autoplay muted loop playsinline id="bgVideo">
   <source src="video.mp4" type="video/mp4">
 </video>
-
-
-
 
 <!-- 🎵 MUSIC -->
 <audio autoplay loop>
@@ -193,9 +196,9 @@ z-index:-1;
 
 <div id="letter">
 Haritha ❤️ <br><br>
-I don’t need a perfect life… I just need you in it.
-Because with you, everything feels enough.
-You are my missing piece…
+I don’t need a perfect life… I just need you in it.  
+Because with you, everything feels enough.  
+You are my missing piece…  
 You complete me. Will you stay with me forever? 💕
 </div>
 
@@ -257,7 +260,7 @@ document.body.appendChild(p);
 setTimeout(()=>p.remove(),8000);
 },800);
 
-/* ===== TYPING MESSAGE ===== */
+/* ===== TYPING ===== */
 const text="love you ❤️";
 let i=0;
 
@@ -278,7 +281,7 @@ startSlideshow();
 },2000);
 }
 
-/* ===== PHOTO SLIDESHOW ===== */
+/* ===== SLIDESHOW ===== */
 let slides=document.querySelectorAll(".slide");
 let index=0;
 
@@ -294,14 +297,14 @@ slides[index].style.display="block";
 showProposal();
 }
 
-/* ===== FINAL PROPOSAL ===== */
+/* ===== PROPOSAL ===== */
 function showProposal(){
 setTimeout(()=>{
 document.getElementById("proposal").style.opacity=1;
 },15000);
 }
 
-/* ===== RESPONSIVE FIX ===== */
+/* ===== RESPONSIVE ===== */
 window.addEventListener("resize",()=>{
 renderer.setSize(window.innerWidth,window.innerHeight);
 camera.aspect=window.innerWidth/window.innerHeight;
@@ -312,3 +315,4 @@ camera.updateProjectionMatrix();
 
 </body>
 </html>
+
