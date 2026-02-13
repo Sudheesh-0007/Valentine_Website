@@ -5,18 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Haritha ❤️</title>
 
-<!-- ThreeJS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== RESET ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* ===== BODY ===== */
 body{
 font-family:'Segoe UI',sans-serif;
 min-height:100vh;
@@ -26,7 +22,7 @@ align-items:center;
 overflow:hidden;
 }
 
-/* ===== BACKGROUND VIDEO ===== */
+/* ===== VIDEO ===== */
 #bgVideo{
 position:fixed;
 top:0;
@@ -36,27 +32,25 @@ height:100%;
 object-fit:cover;
 z-index:-3;
 filter:brightness(0.7);
-animation:zoom 20s ease-in-out infinite alternate;
+animation:zoom 20s infinite alternate;
 }
 
 @keyframes zoom{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
+from{transform:scale(1)}
+to{transform:scale(1.1)}
 }
 
-/* ===== SOFT OVERLAY ===== */
+/* ===== OVERLAY ===== */
 body::before{
 content:"";
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:rgba(255,182,193,0.25);
 z-index:-2;
 }
 
-/* ===== MAIN CARD ===== */
+/* ===== CARD ===== */
 .container{
 width:90%;
 max-width:420px;
@@ -64,7 +58,6 @@ padding:40px 25px;
 border-radius:25px;
 background:rgba(255,255,255,0.6);
 backdrop-filter:blur(15px);
-box-shadow:0 10px 40px rgba(0,0,0,0.2);
 text-align:center;
 z-index:5;
 }
@@ -85,7 +78,6 @@ from{box-shadow:0 0 10px pink}
 to{box-shadow:0 0 35px hotpink}
 }
 
-/* ===== TITLE ===== */
 h1{
 font-family:'Dancing Script',cursive;
 font-size:40px;
@@ -93,11 +85,7 @@ color:#ff4d88;
 }
 
 /* ===== MESSAGE ===== */
-#message{
-margin-top:10px;
-color:#444;
-line-height:1.6;
-}
+#message{margin-top:10px;color:#444}
 
 /* ===== LETTER ===== */
 #letter{
@@ -107,7 +95,6 @@ transition:2s;
 background:white;
 padding:20px;
 border-radius:15px;
-color:#444;
 font-family:'Dancing Script',cursive;
 font-size:20px;
 }
@@ -141,18 +128,18 @@ transition:3s;
 z-index:10;
 }
 
-/* ===== FLOATING HEARTS ===== */
+/* ===== HEARTS ===== */
 .heart{
 position:absolute;
 color:#ff6fa0;
 animation:float 6s linear infinite;
 }
 @keyframes float{
-0%{transform:translateY(100vh);opacity:0}
-100%{transform:translateY(-10vh);opacity:1}
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
 }
 
-/* ===== ROSE PETALS ===== */
+/* ===== PETALS ===== */
 .petal{
 position:absolute;
 animation:fall 8s linear infinite;
@@ -162,7 +149,7 @@ animation:fall 8s linear infinite;
 100%{transform:translateY(110vh) rotate(360deg)}
 }
 
-/* ===== 3D CANVAS ===== */
+/* ===== 3D ===== */
 #threeContainer{
 position:fixed;
 top:0;
@@ -175,20 +162,19 @@ z-index:-1;
 
 <body>
 
-<!-- 🎬 BACKGROUND VIDEO -->
+<!-- VIDEO -->
 <video autoplay muted loop playsinline id="bgVideo">
   <source src="video.mp4" type="video/mp4">
 </video>
 
-<!-- 🎵 MUSIC -->
-<audio autoplay loop>
-<source src="music.mp3">
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3">
 </audio>
 
 <div id="threeContainer"></div>
 
 <div class="container">
-
 <img src="haritha.jpg" class="profile">
 <h1>Haritha ❤️</h1>
 
@@ -207,12 +193,18 @@ You complete me. Will you stay with me forever? 💕
 <img src="photo2.jpg" class="slide">
 <img src="photo3.jpg" class="slide">
 </div>
-
 </div>
 
 <div id="proposal">Will You Be Mine Forever? 💍</div>
 
 <script>
+
+/* ===== MUSIC FIX ===== */
+document.body.addEventListener("click", function(){
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.5;
+  music.play();
+}, { once: true });
 
 /* ===== 3D HEART ===== */
 const scene=new THREE.Scene();
@@ -222,9 +214,10 @@ renderer.setSize(window.innerWidth,window.innerHeight);
 document.getElementById("threeContainer").appendChild(renderer.domElement);
 camera.position.z=5;
 
-const geometry=new THREE.TorusKnotGeometry(1,0.3,100,16);
-const material=new THREE.MeshStandardMaterial({color:0xff7aa2});
-const heart=new THREE.Mesh(geometry,material);
+const heart=new THREE.Mesh(
+new THREE.TorusKnotGeometry(1,0.3,100,16),
+new THREE.MeshStandardMaterial({color:0xff7aa2})
+);
 scene.add(heart);
 
 const light=new THREE.PointLight(0xffffff,1);
@@ -239,18 +232,17 @@ renderer.render(scene,camera);
 }
 animate();
 
-/* ===== FLOATING HEARTS ===== */
+/* ===== HEARTS ===== */
 setInterval(()=>{
 let h=document.createElement("div");
 h.innerHTML="❤️";
 h.className="heart";
 h.style.left=Math.random()*100+"vw";
-h.style.fontSize=Math.random()*20+15+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),6000);
 },600);
 
-/* ===== ROSE PETALS ===== */
+/* ===== PETALS ===== */
 setInterval(()=>{
 let p=document.createElement("div");
 p.innerHTML="🌸";
@@ -261,13 +253,10 @@ setTimeout(()=>p.remove(),8000);
 },800);
 
 /* ===== TYPING ===== */
-const text="love you ❤️";
-let i=0;
-
+let text="love you ❤️",i=0;
 function type(){
 if(i<text.length){
-document.getElementById("message").innerHTML+=text.charAt(i);
-i++;
+document.getElementById("message").innerHTML+=text[i++];
 setTimeout(type,50);
 }else showLetter();
 }
@@ -282,8 +271,7 @@ startSlideshow();
 }
 
 /* ===== SLIDESHOW ===== */
-let slides=document.querySelectorAll(".slide");
-let index=0;
+let slides=document.querySelectorAll(".slide"),index=0;
 
 function startSlideshow(){
 slides[0].style.display="block";
