@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Haritha ❤️</title>
+
+<!-- ThreeJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- Handwritten Font -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+
+/* ===== BODY ===== */
+body{
+font-family:'Segoe UI',sans-serif;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
+
+/* ===== BACKGROUND VIDEO ===== */
+#bgVideo{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(0.7);
+}
+
+
+/* soft romantic overlay */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,182,193,0.25);
+z-index:-2;
+}
+
+/* ===== MAIN CARD ===== */
+.container{
+width:90%;
+max-width:420px;
+padding:40px 25px;
+border-radius:25px;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(15px);
+box-shadow:0 10px 40px rgba(0,0,0,0.2);
+text-align:center;
+z-index:5;
+}
+
+/* ===== PROFILE ===== */
+.profile{
+width:120px;height:120px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid white;
+box-shadow:0 0 25px pink;
+margin-bottom:20px;
+animation:glow 3s infinite alternate;
+}
+
+@keyframes glow{
+from{box-shadow:0 0 10px pink}
+to{box-shadow:0 0 35px hotpink}
+}
+
+/* ===== TITLE ===== */
+h1{
+font-family:'Dancing Script',cursive;
+font-size:40px;
+color:#ff4d88;
+}
+
+/* ===== MESSAGE ===== */
+#message{
+margin-top:10px;
+color:#444;
+line-height:1.6;
+}
+
+/* ===== LETTER ===== */
+#letter{
+opacity:0;
+margin-top:20px;
+transition:2s;
+background:white;
+padding:20px;
+border-radius:15px;
+color:#444;
+font-family:'Dancing Script',cursive;
+font-size:20px;
+}
+
+/* ===== SLIDESHOW ===== */
+.slideshow{
+margin-top:20px;
+height:200px;
+border-radius:15px;
+overflow:hidden;
+}
+.slideshow img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:none;
+}
+
+/* ===== PROPOSAL ===== */
+#proposal{
+opacity:0;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-family:'Dancing Script',cursive;
+font-size:50px;
+color:white;
+text-shadow:0 0 20px hotpink;
+transition:3s;
+z-index:10;
+}
+
+/* ===== FLOATING HEARTS ===== */
+.heart{
+position:absolute;
+color:#ff6fa0;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(100vh);opacity:0}
+100%{transform:translateY(-10vh);opacity:1}
+}
+
+/* ===== ROSE PETALS ===== */
+.petal{
+position:absolute;
+animation:fall 8s linear infinite;
+}
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0)}
+100%{transform:translateY(110vh) rotate(360deg)}
+}
+
+/* ===== 3D HEART CANVAS ===== */
+#threeContainer{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+</style>
+</head>
+
+<body>
+<!-- 🎬 Background Love Video -->
+<video autoplay loop playsinline id="bgVideo">
+  <source src="video.mp4" type="video/mp4">
+</video>
+
+
+
+
+<!-- 🎵 MUSIC -->
+<audio autoplay loop>
+<source src="music.mp3">
+</audio>
+
+<div id="threeContainer"></div>
+
+<div class="container">
+
+<img src="haritha.jpg" class="profile">
+<h1>Haritha ❤️</h1>
+
+<div id="message"></div>
+
+<div id="letter">
+Haritha ❤️ <br><br>
+I don’t need a perfect life… I just need you in it.
+Because with you, everything feels enough.
+You are my missing piece…
+You complete me. Will you stay with me forever? 💕
+</div>
+
+<div class="slideshow">
+<img src="photo1.jpg" class="slide">
+<img src="photo2.jpg" class="slide">
+<img src="photo3.jpg" class="slide">
+</div>
+
+</div>
+
+<div id="proposal">Will You Be Mine Forever? 💍</div>
+
+<script>
+
+/* ===== 3D HEART ===== */
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth,window.innerHeight);
+document.getElementById("threeContainer").appendChild(renderer.domElement);
+camera.position.z=5;
+
+const geometry=new THREE.TorusKnotGeometry(1,0.3,100,16);
+const material=new THREE.MeshStandardMaterial({color:0xff7aa2});
+const heart=new THREE.Mesh(geometry,material);
+scene.add(heart);
+
+const light=new THREE.PointLight(0xffffff,1);
+light.position.set(5,5,5);
+scene.add(light);
+
+function animate(){
+requestAnimationFrame(animate);
+heart.rotation.x+=0.005;
+heart.rotation.y+=0.005;
+renderer.render(scene,camera);
+}
+animate();
+
+/* ===== FLOATING HEARTS ===== */
+setInterval(()=>{
+let h=document.createElement("div");
+h.innerHTML="❤️";
+h.className="heart";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=Math.random()*20+15+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},600);
+
+/* ===== ROSE PETALS ===== */
+setInterval(()=>{
+let p=document.createElement("div");
+p.innerHTML="🌸";
+p.className="petal";
+p.style.left=Math.random()*100+"vw";
+document.body.appendChild(p);
+setTimeout(()=>p.remove(),8000);
+},800);
+
+/* ===== TYPING MESSAGE ===== */
+const text="love you ❤️";
+let i=0;
+
+function type(){
+if(i<text.length){
+document.getElementById("message").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,50);
+}else showLetter();
+}
+type();
+
+/* ===== LETTER ===== */
+function showLetter(){
+setTimeout(()=>{
+document.getElementById("letter").style.opacity=1;
+startSlideshow();
+},2000);
+}
+
+/* ===== PHOTO SLIDESHOW ===== */
+let slides=document.querySelectorAll(".slide");
+let index=0;
+
+function startSlideshow(){
+slides[0].style.display="block";
+
+setInterval(()=>{
+slides.forEach(s=>s.style.display="none");
+index=(index+1)%slides.length;
+slides[index].style.display="block";
+},3000);
+
+showProposal();
+}
+
+/* ===== FINAL PROPOSAL ===== */
+function showProposal(){
+setTimeout(()=>{
+document.getElementById("proposal").style.opacity=1;
+},15000);
+}
+
+/* ===== RESPONSIVE FIX ===== */
+window.addEventListener("resize",()=>{
+renderer.setSize(window.innerWidth,window.innerHeight);
+camera.aspect=window.innerWidth/window.innerHeight;
+camera.updateProjectionMatrix();
+});
+
+</script>
+
+</body>
+</html>
